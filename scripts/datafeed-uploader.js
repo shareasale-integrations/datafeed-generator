@@ -12,61 +12,64 @@ window.addEventListener("load", () => {
         let datafeed = [["SKU","Name","URL to product","Price","Retail Price","URL to image","URL to thumbnail image","Commission","Category","SubCategory","Description","SearchTerms","Status","Your MerchantID","Custom 1","Custom 2","Custom 3","Custom 4","Custom 5","Manufacturer","PartNumber","MerchantCategory","MerchantSubcategory","ShortDescription","ISBN","UPC","CrossSell","MerchantGroup","MerchantSubgroup","CompatibleWith","CompareTo","QuantityDiscount","Bestseller","AddToCartURL","ReviewsRSSURL","Option1","Option2","Option3","Option4","Option5","customCommissions","customCommissionIsFlatRate","customCommissionNewCustomerMultiplier","mobileURL","mobileImage","mobileThumbnail","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse"]];
         if (shopifyHandler(data[0])) {
             data.forEach((row) => {
-                if (row[7] == "TRUE" && row[17] != "") {
-                    let newRow = [];
-                    datafeed[0].forEach((headerItem) => {
-                        switch (headerItem) {
-                            case "URL to product":
-                                newRow.push(siteURL ? `${siteURL}${row[headersObj[headerItem]]}` : "");
-                                break;
-                            case "Description":
-                                newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
-                                break;
-                            case "Category":
-                                newRow.push(headersObj[headerItem] || "");
-                                break;
-                            case "SubCategory":
-                                newRow.push(headersObj[headerItem] || "");
-                                break;
-                            case "Your MerchantID":
-                                newRow.push(headersObj[headerItem] || "");
-                                break;
-                            default:
-                                newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
-                        }
-                    });
-                    datafeed.push(newRow);
+                if (row[7] != undefined && row[17] != undefined) {
+                    if (row[7].toUpperCase() == "TRUE" && row[17] != "") {
+                        let newRow = [];
+                        datafeed[0].forEach((headerItem) => {
+                            switch (headerItem) {
+                                case "URL to product":
+                                    newRow.push(siteURL ? `${siteURL}${row[headersObj[headerItem]]}` : "");
+                                    break;
+                                case "Description":
+                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    break;
+                                case "Category":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                case "SubCategory":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                case "Your MerchantID":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                default:
+                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                            }
+                        });
+                        datafeed.push(newRow);
+                    }
                 }
             });
         } else {
             data.forEach((row) => {
-                if (row != data[0]) {
-                    let newRow = [];
-                    datafeed[0].forEach((headerItem) => {
-                        switch (headerItem) {
-                            case "URL to product":
-                                newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
-                                break;
-                            case "Description":
-                                newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
-                                break;
-                            case "Category":
-                                newRow.push(headersObj[headerItem] || "");
-                                break;
-                            case "SubCategory":
-                                newRow.push(headersObj[headerItem] || "");
-                                break;
-                            case "Your MerchantID":
-                                newRow.push(headersObj[headerItem] || "");
-                                break;
-                            default:
-                                newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
-                        }
-                    });
-                    datafeed.push(newRow);
-                }
+                    if (row.length > 0 && row != data[0]) {
+                        let newRow = [];
+                        datafeed[0].forEach((headerItem) => {
+                            switch (headerItem) {
+                                case "URL to product":
+                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    break;
+                                case "Description":
+                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    break;
+                                case "Category":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                case "SubCategory":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                case "Your MerchantID":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                default:
+                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                            }
+                        });
+                        datafeed.push(newRow);
+                    }
             });
         }
+        
         
         // Convert array to CSV string
         const csvContent = datafeed.map(row => row.join(",")).join("\n");
