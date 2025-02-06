@@ -73,9 +73,12 @@ window.addEventListener("load", () => {
         
         // Create a Blob from the CSV string
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+        const date = new Date();
+        let today = `${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}_${date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1}_${date.getFullYear()}`;
         
         // Use FileSaver.js to save the file
-        saveAs(blob, "datafeed.csv");
+        saveAs(blob, `${headersObj["Your MerchantID"] ? headersObj["Your MerchantID"] : ""}datafeed-${today}.csv`);
     }
 
     // Generate headerObj
@@ -291,8 +294,11 @@ window.addEventListener("load", () => {
     const genHeadersOpt = (headersColumns) => {
         let isShopify = shopifyHandler(headersColumns);
         const columnsForm = document.querySelector("#datafeed-headers").querySelectorAll("select");
+        let sortedHeaders = [];
+        headersColumns.forEach((item) => sortedHeaders.push(item));
         let newEl = [];
-        headersColumns.sort().forEach((hd) => {
+        
+        sortedHeaders.sort().forEach((hd) => {
             if (hd !=""){
                 let newOption = document.createElement("option");
                 newOption.value = hd, newOption.textContent = hd;
