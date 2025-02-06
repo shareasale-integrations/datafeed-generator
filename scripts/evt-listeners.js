@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
     });
 
     uploadBtn.addEventListener("click", () => {
-        inputBtn.value == "" ? inputBtn.click() : handleMessage(messageContainer, "You already have a file uploaded, please use the rest button before uploading a new file", true);
+        inputBtn.value == "" ? inputBtn.click() : handleMessage(messageContainer, "You already have a file uploaded, please use the refresh button before uploading a new file", true);
     });
 
     downloadBtn.addEventListener("click", () => {
