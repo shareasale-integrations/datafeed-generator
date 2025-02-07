@@ -13,7 +13,10 @@ window.addEventListener("load", () => {
         if (shopifyHandler(data[0])) {
             data.forEach((row) => {
                 if (row[7] != undefined && row[17] != undefined) {
-                    if (row[7].toUpperCase() == "TRUE" && row[17] != "") {
+                    if (row[7].toUpperCase() == "TRUE" && row[17] != ""
+                    && (row[headersObj["SKU"]] != "" && row[headersObj["SKU"]] != undefined)
+                    && (row[headersObj["URL to product"]] != "" && row[headersObj["URL to product"]] != undefined)
+                    && (row[headersObj["Price"]] != "" && row[headersObj["Price"]] != undefined)) {
                         let newRow = [];
                         datafeed[0].forEach((headerItem) => {
                             switch (headerItem) {
@@ -42,7 +45,10 @@ window.addEventListener("load", () => {
             });
         } else {
             data.forEach((row) => {
-                    if (row.length > 0 && row != data[0]) {
+                    if (row.length > 0 && row != data[0] 
+                        && (row[headersObj["SKU"]] != "" && row[headersObj["SKU"]] != undefined)
+                        && (row[headersObj["URL to product"]] != "" && row[headersObj["URL to product"]] != undefined)
+                        && (row[headersObj["Price"]] != "" && row[headersObj["Price"]] != undefined)) {
                         let newRow = [];
                         datafeed[0].forEach((headerItem) => {
                             switch (headerItem) {
