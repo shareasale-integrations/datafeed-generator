@@ -28,6 +28,8 @@ window.addEventListener("load", () => {
     });
 
     resetBtn.addEventListener("click", () => {
+        document.querySelector(`#category option`).selected = true;
+        document.querySelector(`#subcategory option`).selected = true;
         inputBtn.value = "";
         (shopifyInput.classList.add("user-form__input_shopify_hide"), shopifyInput.classList.remove("user-form__input_mandatory"));
         dfHeaders.forEach((select) => select.innerHTML = "");
