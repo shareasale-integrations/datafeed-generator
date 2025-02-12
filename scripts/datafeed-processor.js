@@ -28,7 +28,7 @@ window.addEventListener("load", () => {
                                     newRow.push(siteURL ? `${siteURL}${row[headersObj[headerItem]]}` : "");
                                     break;
                                 case "Description":
-                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    newRow.push(row[headersObj[headerItem]] ? `"${sanitizeInputs(row[headersObj[headerItem]]).split('"').join(`""`)}"` : "");
                                     break;
                                 case "Category":
                                     newRow.push(headersObj[headerItem] || "");
@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
                                     newRow.push(headersObj[headerItem] || "");
                                     break;
                                 default:
-                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    newRow.push(row[headersObj[headerItem]] ? `"${sanitizeInputs(row[headersObj[headerItem]]).split('"').join(`""`)}"` : "");
                             }
                         });
                         datafeed.push(newRow);
@@ -63,7 +63,7 @@ window.addEventListener("load", () => {
                                     newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
                                     break;
                                 case "Description":
-                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    newRow.push(row[headersObj[headerItem]] ? `"${sanitizeInputs(row[headersObj[headerItem]]).split('"').join(`""`)}"` : "");
                                     break;
                                 case "Category":
                                     newRow.push(headersObj[headerItem] || "");
@@ -78,7 +78,7 @@ window.addEventListener("load", () => {
                                     newRow.push(headersObj[headerItem] || "");
                                     break;
                                 default:
-                                    newRow.push(row[headersObj[headerItem]] ? `"${row[headersObj[headerItem]].split('"').join(`""`)}"` : "");
+                                    newRow.push(row[headersObj[headerItem]] ? `"${sanitizeInputs(row[headersObj[headerItem]]).split('"').join(`""`)}"` : "");
                             }
                         });
                         datafeed.push(newRow);
@@ -316,6 +316,14 @@ window.addEventListener("load", () => {
         let hasStores = false
         hasStores = document.querySelector("#storesconnect").classList.contains("user-form__input-field_checked") ? true : false;
         return hasStores;
+    }
+
+    const sanitizeInputs = (input) => {
+        const regex1 = /\|/;
+        const regex2 = /"(?![^<>]*>)/g;
+        const str = input;
+        const sanitize = str.replace(regex1, "/").replace(regex2, `''`);
+        return sanitize;
     }
 
     // Get Headers Options
