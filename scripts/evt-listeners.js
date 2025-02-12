@@ -7,6 +7,8 @@ window.addEventListener("load", () => {
     let messageContainer = uploadContainer.querySelector(".upload-container__message");
     let shopifyInput = document.querySelector(".user-form__input_shopify");
     let dfHeaders = document.querySelector(".datafeed-information_headers").querySelectorAll("select");
+    let storeCheck = document.querySelector("#storesconnect");
+    let storeIDInput = document.querySelector(".user-form__input_storesconnect");
 
     let helpPopup = document.querySelector(".help-popup");
     let helpOpen = helpPopup.querySelector(".help-button_open");
@@ -25,6 +27,12 @@ window.addEventListener("load", () => {
 
     downloadBtn.addEventListener("click", () => {
         inputBtn.value == "" ? handleMessage(messageContainer, "Please add a file to start processing your datafeed", true) : "";
+    });
+
+    storeCheck.addEventListener("click", () => {
+        storeCheck.classList.toggle("user-form__input-field_checked");
+        storeIDInput.classList.toggle("user-form__input_storesconnect_hide");
+        storeIDInput.classList.toggle("user-form__input_mandatory");
     });
 
     resetBtn.addEventListener("click", () => {
