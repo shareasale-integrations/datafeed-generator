@@ -3,13 +3,17 @@ window.addEventListener("load", () => {
     let downloadBtn = document.querySelector(".download-container");
     let msgContainer = document.querySelector(".status-popup__message");
     let currentFile;
+    let dfHead = ["SKU","Name","URL to product","Price","Retail Price","URL to image","URL to thumbnail image","Commission","Category","SubCategory","Description","SearchTerms","Status","Your MerchantID","Custom 1","Custom 2","Custom 3","Custom 4","Custom 5","Manufacturer","PartNumber","MerchantCategory","MerchantSubcategory","ShortDescription","ISBN","UPC","CrossSell","MerchantGroup","MerchantSubgroup","CompatibleWith","CompareTo","QuantityDiscount","Bestseller","AddToCartURL","ReviewsRSSURL","Option1","Option2","Option3","Option4","Option5","customCommissions","customCommissionIsFlatRate","customCommissionNewCustomerMultiplier","mobileURL","mobileImage","mobileThumbnail","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse"];
+    let dfHeadStores = ["SKU","Name","URL to product","Price","Retail Price","URL to image","URL to thumbnail image","Commission","Category","SubCategory","Description","SearchTerms","Status","Your MerchantID","Custom 1","Custom 2","Custom 3","Custom 4","Custom 5", "Store ID","Manufacturer","PartNumber","MerchantCategory","MerchantSubcategory","ShortDescription","ISBN","UPC","CrossSell","MerchantGroup","MerchantSubgroup","CompatibleWith","CompareTo","QuantityDiscount","Bestseller","AddToCartURL","ReviewsRSSURL","Option1","Option2","Option3","Option4","Option5","customCommissions","customCommissionIsFlatRate","customCommissionNewCustomerMultiplier","mobileURL","mobileImage","mobileThumbnail","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse"];
 
 
 
     // Generate Datafeed File
     const generateDatafeed = (data, headersObj, siteURL) => {
 
-        let datafeed = [["SKU","Name","URL to product","Price","Retail Price","URL to image","URL to thumbnail image","Commission","Category","SubCategory","Description","SearchTerms","Status","Your MerchantID","Custom 1","Custom 2","Custom 3","Custom 4","Custom 5","Manufacturer","PartNumber","MerchantCategory","MerchantSubcategory","ShortDescription","ISBN","UPC","CrossSell","MerchantGroup","MerchantSubgroup","CompatibleWith","CompareTo","QuantityDiscount","Bestseller","AddToCartURL","ReviewsRSSURL","Option1","Option2","Option3","Option4","Option5","customCommissions","customCommissionIsFlatRate","customCommissionNewCustomerMultiplier","mobileURL","mobileImage","mobileThumbnail","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse","ReservedForFutureUse"]];
+
+        let feedHeader = isStoresConnect() ? dfHeadStores : dfHead;
+        let datafeed = [feedHeader];
         if (shopifyHandler(data[0])) {
             data.forEach((row) => {
                 if (row[7] != undefined && row[17] != undefined) {
@@ -33,6 +37,9 @@ window.addEventListener("load", () => {
                                     newRow.push(headersObj[headerItem] || "");
                                     break;
                                 case "Your MerchantID":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                case "Store ID":
                                     newRow.push(headersObj[headerItem] || "");
                                     break;
                                 default:
@@ -65,6 +72,9 @@ window.addEventListener("load", () => {
                                     newRow.push(headersObj[headerItem] || "");
                                     break;
                                 case "Your MerchantID":
+                                    newRow.push(headersObj[headerItem] || "");
+                                    break;
+                                case "Store ID":
                                     newRow.push(headersObj[headerItem] || "");
                                     break;
                                 default:
@@ -143,13 +153,16 @@ window.addEventListener("load", () => {
             "ReservedForFutureUse": "",
             "ReservedForFutureUse": ""
         };
+        if (isStoresConnect()) {
+            columns["Store ID"] = document.querySelector("#store-id").value != "" ? document.querySelector("#store-id").value : "";
+        }
 
         let inputs = document.querySelectorAll(".user-form__input");
         let shopifyUrl = "";
 
         inputs.forEach((input) => {
-            let inputValue = input.querySelector("input") != null ? input.querySelector("input").value : input.querySelector("select").options[input.querySelector("select").selectedIndex].value;
-            let inputId = input.querySelector("input") != null ? input.querySelector("input").id : input.querySelector("select").id;
+            let inputValue = input.querySelector(".input") != null ? input.querySelector(".input").value : input.querySelector("select").options[input.querySelector("select").selectedIndex].value;
+            let inputId = input.querySelector(".input") != null ? input.querySelector(".input").id : input.querySelector("select").id;
 
             switch (inputId) {
                 case "merchant-id":
@@ -278,7 +291,7 @@ window.addEventListener("load", () => {
         let invalidInputs = 0;
         let inputs = document.querySelectorAll(".user-form__input_mandatory");
         inputs.forEach((input) => {
-            let inputValue = input.querySelector("input") != null ? input.querySelector("input").value : input.querySelector("select").options[input.querySelector("select").selectedIndex].value;
+            let inputValue = input.querySelector(".input") != null ? input.querySelector(".input").value : input.querySelector("select").options[input.querySelector("select").selectedIndex].value;
             inputValue == "" ? invalidInputs++ : "";
         });
         return invalidInputs == 0 ? true : false;
@@ -297,6 +310,12 @@ window.addEventListener("load", () => {
         (shopifyInput.classList.remove("user-form__input_shopify_hide"), shopifyInput.classList.add("user-form__input_mandatory")) : 
         (shopifyInput.classList.add("user-form__input_shopify_hide"), shopifyInput.classList.remove("user-form__input_mandatory"));
         return isShopify;
+    }
+
+    const isStoresConnect = () => {
+        let hasStores = false
+        hasStores = document.querySelector("#storesconnect").classList.contains("user-form__input-field_checked") ? true : false;
+        return hasStores;
     }
 
     // Get Headers Options
