@@ -25,7 +25,7 @@ window.addEventListener("load", () => {
                         datafeed[0].forEach((headerItem) => {
                             switch (headerItem) {
                                 case "URL to product":
-                                    newRow.push(siteURL ? `${siteURL}${row[headersObj[headerItem]]}` : "");
+                                    newRow.push(siteURL ? `${siteURL.substring(0, 4) == "http" ? siteURL : "https://" + siteURL}${row[headersObj[headerItem]]}` : "");
                                     break;
                                 case "Description":
                                     newRow.push(row[headersObj[headerItem]] ? `"${sanitizeInputs(row[headersObj[headerItem]]).split('"').join(`""`)}"` : "");
