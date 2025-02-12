@@ -38,19 +38,25 @@
     </header>
     <div class="main">
         <div class="upload-container">
-            <p class="upload-container__upload">Upload File</p>
+            <p class="upload-container__upload">Upload .csv File</p>
             <div class="remove-container">
                 <i class="fa-solid fa-repeat"></i>
             </div>
             <P class="upload-container__message"></P>
             <p class="download-container">Download Datafeed</p>
-            <input type="file" id="csvFileInput" accept=".csv" class="upload-container__hidden-input" />
+            <input type="file" id="csvFileInput" accept=".csv" class="input upload-container__hidden-input" />
         </div>
         <div class="user-form" id="datafeed-form">
             <div class="datafeed-information" id="datafeed-details">
                 <div class="user-form__input user-form__input_mandatory">
                     <p class="user-form__input-title">Your Merchant ID <span class="user-form__input-title_mandatory">- Mandatory</span></p>
-                    <input type="number" class="user-form__input-field" id="merchant-id" value=""/>
+                    <input type="number" class="input user-form__input-field" id="merchant-id" value="" min="0" placeholder="Your Merchant ID can be found into your ShareASale account"/>
+                </div>
+                <div class="user-form__input user-form__input_checkbox">
+                    <p class="user-form__input-title">Check here if you use Datafeed By Store (StoresConnect):</p>
+                    <span type="checkbox" class="input user-form__input-field" id="storesconnect">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
                 </div>
                 <div class="user-form__input user-form__input_mandatory">
                     <p class="user-form__input-title">Category <span class="user-form__input-title_detail">(select one of the options below)</span></p>
@@ -268,9 +274,14 @@
                         <option value="186">186: Accessories</option>
                     </select>
                 </div>
+                <div class="user-form__input user-form__input_storesconnect user-form__input_storesconnect_hide">
+                    <p class="user-form__input-title">StoreID <span class="user-form__input-title_mandatory">- Mandatory</span></p>
+                    <input type="number" class="input user-form__input-field" id="store-id" value="" min="1" placeholder="Add the Store ID"/>
+                    <p class="user-form__input-text">Please use this option only if you have StoresConnect activated with the Datafeed By Store option.</p>
+                </div>
                 <div class="user-form__input user-form__input_shopify user-form__input_shopify_hide">
                     <p class="user-form__input-title">Add your website product's URL <span class="user-form__input-title_mandatory">- Mandatory</span></p>
-                    <input type="url" class="user-form__input-field" id="site-url" placeholder="https://www.yourwebsite.com/products/" />
+                    <input type="url" class="input user-form__input-field" id="site-url" placeholder="https://www.yourwebsite.com/products/" />
                     <div class="user-form__input-details">
                         <p class="user-form__input-text">As Shopify files do not provide a product's URL, please check one of your product's URL and copy it without incluing the product's slug/name.</p>
                         <div class="user-form__example">
