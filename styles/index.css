@@ -429,6 +429,7 @@ input[type="number"]::-webkit-outer-spin-button {
     overflow: auto;
     row-gap: 40px;
     font-size: 1.125rem;
+    line-height: 1.2;
     color: var(--font-color);
 }
 .help-list {
@@ -445,8 +446,17 @@ input[type="number"]::-webkit-outer-spin-button {
 .help-list__item::before {
     content: "";
     width: 10px;
+    min-width: 10px;
+    max-width: 10px;
     height: 2px;
     background: var(--font-color);
+}
+.help-content a {
+    color: var(--sas-blue-color);
+    text-decoration: none;
+}
+.help-content__bold {
+    font-weight: 700;
 }
 .help-content__text_bold {
     font-weight: 700;
