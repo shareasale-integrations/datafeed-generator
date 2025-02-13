@@ -9,7 +9,11 @@ window.addEventListener("load", () => {
     let dfHeaders = document.querySelector(".datafeed-information_headers").querySelectorAll("select");
     let storeCheck = document.querySelector("#storesconnect");
     let storeIDInput = document.querySelector(".user-form__input_storesconnect");
-
+    let mandatoryInputs = [];
+    document.querySelectorAll(".user-form__input_mandatory").forEach((el) => mandatoryInputs.push(el));
+    mandatoryInputs.push(storeIDInput);
+    mandatoryInputs.push(shopifyInput);
+   
     let helpPopup = document.querySelector(".help-popup");
     let helpOpen = helpPopup.querySelector(".help-button_open");
     let helpClose = helpPopup.querySelector(".help-button_close");
@@ -46,7 +50,14 @@ window.addEventListener("load", () => {
 
     inputBtn.addEventListener("change", () => {
         inputBtn.value == "" ? "" : handleMessage(messageContainer, "File Uploaded", false);
-    })
+    });
+
+    mandatoryInputs.forEach((input) => {
+        input.addEventListener("change", () => {
+            let valid = input.querySelector("input") ? input.querySelector("input").value != "" : input.querySelector("select").options[input.querySelector("select").selectedIndex].textContent != "Select one option";
+            valid ? input.classList.remove("user-form__input_invalid") : input.classList.add("user-form__input_invalid");
+        })
+    });
 
     const handleMessage = (container, message, error) => {
         error ? container.classList.add("error") : container.classList.remove("error");
