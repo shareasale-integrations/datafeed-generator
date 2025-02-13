@@ -223,7 +223,10 @@
     row-gap: 25px;
     width: 45%;
 }
-
+.datafeed-information__description {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
 .datafeed-information_headers {
     flex-direction: row;
     flex-wrap: wrap;
@@ -246,6 +249,12 @@
     flex-direction: column;
     width: 95%;
     row-gap: 10px;
+}
+.user-form__input_invalid .user-form__input-title {
+    color: var(--red-lg);
+}
+.user-form__input_invalid input, .user-form__input_invalid select {
+    border-bottom: 1.5px var(--red-lg) solid !important;
 }
 .datafeed-information_headers .user-form__input {
     width: 30%;
