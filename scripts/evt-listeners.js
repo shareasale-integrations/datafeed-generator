@@ -45,6 +45,7 @@ window.addEventListener("load", () => {
         inputBtn.value = "";
         (shopifyInput.classList.add("user-form__input_shopify_hide"), shopifyInput.classList.remove("user-form__input_mandatory"));
         dfHeaders.forEach((select) => select.innerHTML = "");
+        mandatoryInputs.forEach((input) => input.classList.remove("user-form__input_invalid"));
         handleMessage(messageContainer, "File Removed", false);
     });
 
@@ -53,7 +54,7 @@ window.addEventListener("load", () => {
     });
 
     mandatoryInputs.forEach((input) => {
-        input.addEventListener("change", () => {
+        input.addEventListener("input", () => {
             let valid = input.querySelector("input") ? input.querySelector("input").value != "" : input.querySelector("select").options[input.querySelector("select").selectedIndex].textContent != "Select one option";
             valid ? input.classList.remove("user-form__input_invalid") : input.classList.add("user-form__input_invalid");
         })
