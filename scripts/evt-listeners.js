@@ -13,6 +13,9 @@ window.addEventListener("load", () => {
     document.querySelectorAll(".user-form__input_mandatory").forEach((el) => mandatoryInputs.push(el));
     mandatoryInputs.push(storeIDInput);
     mandatoryInputs.push(shopifyInput);
+
+    let seeMoreBtn = document.querySelector(".datafeed-information__see-more");
+    let seeMoreContainer = document.querySelector(".datafeed-information__more-inputs");
    
     let helpPopup = document.querySelector(".help-popup");
     let helpOpen = helpPopup.querySelector(".help-button_open");
@@ -58,6 +61,15 @@ window.addEventListener("load", () => {
             let valid = input.querySelector("input") ? input.querySelector("input").value != "" : input.querySelector("select").options[input.querySelector("select").selectedIndex].textContent != "Select one option";
             valid ? input.classList.remove("user-form__input_invalid") : input.classList.add("user-form__input_invalid");
         })
+    });
+
+    seeMoreBtn.addEventListener("click", () => {
+        seeMoreBtn.classList.toggle("datafeed-information__see-more_clicked");
+        seeMoreContainer.classList.toggle("datafeed-information__more-inputs_collapsed");
+
+        seeMoreBtn.classList.contains("datafeed-information__see-more_clicked") ? 
+        seeMoreBtn.textContent = "Less options" :
+        seeMoreBtn.textContent = "More options" ;
     });
 
     const handleMessage = (container, message, error) => {
