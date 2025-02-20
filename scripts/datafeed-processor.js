@@ -231,6 +231,81 @@ window.addEventListener("load", () => {
                 case "custom-5-column":
                     columns["Custom 5"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
                     break;
+                case "manufacturer-column":
+                    columns["Manufacturer"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "partnumber-column":
+                    columns["PartNumber"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "merchantcategory-column":
+                    columns["MerchantCategory"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "merchantsubcategory-column":
+                    columns["MerchantSubcategory"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "shortdescription-column":
+                    columns["ShortDescription"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "isbn-column":
+                    columns["ISBN"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "upc-column":
+                    columns["UPC"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "crosssell-column":
+                    columns["CrossSell"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "merchantgroup-column":
+                    columns["MerchantGroup"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "merchantsubgroup-column":
+                    columns["MerchantSubgroup"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "compatiblewith-column":
+                    columns["CompatibleWith"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "compareto-column":
+                    columns["CompareTo"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "quantitydiscount-column":
+                    columns["QuantityDiscount"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "bestseller-column":
+                    columns["Bestseller"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "addtocarturl-column":
+                    columns["AddToCartURL"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "reviewsrssurl-column":
+                    columns["ReviewsRSSURL"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "option1-column":
+                    columns["Option1"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "option2-column":
+                    columns["Option2"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "option3-column":
+                    columns["Option3"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "option4-column":
+                    columns["Option4"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "option5-column":
+                    columns["Option5"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "mobileurl-column":
+                    columns["mobileURL"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "mobileimage-column":
+                    columns["mobileImage"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "mobilethumbnail-column":
+                    columns["mobileThumbnail"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
+                case "customcommissionnewcustomermultiplier-column":
+                    columns["customCommissionNewCustomerMultiplier"] = inputValue != "" ? dataHeaders.indexOf(inputValue) : "";
+                    break;
             }
         });
         return [columns, shopifyUrl];
